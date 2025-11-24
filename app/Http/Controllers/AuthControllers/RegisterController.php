@@ -26,10 +26,13 @@ class RegisterController extends Controller
             ]);
 
             $data['password'] = bcrypt($data['password']);
+            $data['must_change_password'] = false;
 
             $user = User::create($data);
+            $user->assignRole('user');
             event(new Registered($user));
         } catch (\Exception $e) {
+            //dd($e->getMessage());
             return back()->with('error', "Wystąpił nieoczekiwany błąd. Spróbuj ponowanie później bądź skontaktuj się z administratorem.");
         }
 

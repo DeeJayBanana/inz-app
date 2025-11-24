@@ -5,10 +5,11 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    @stack('scripts')
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+
     <title></title>
 </head>
 <body>
@@ -32,9 +33,9 @@
             <span class="d-block text-center fs-3 lh-1 fw-bold"><a href="/panel" class="text-dark text-decoration-none">AI Video Analyser</a></span>
             <button class="btn btn-primary float-end" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i class="fa-solid fa-bars"></i></button>
 
-            <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+            <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel" style="background-color:rgba(71,88,228)">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel"><a href="/panel" class="text-dark text-decoration-none">AI Video Analyser</a></h5>
+                    <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel"><a href="/panel" class="text-white text-decoration-none">AI VIDEO</a></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
@@ -43,19 +44,24 @@
 
         </div>
 
-        <div class="col-12 col-md-2 border-end d-none d-lg-block" style="height: 100vh;">
+        <div class="col-12 col-md-2 border-end d-none d-lg-block" style="height: 100vh;background-color:rgba(71,88,228)">
 
-            <span class="d-block text-center p-3 fs-3 lh-1 fw-bold" style="height: 10vh;"><a href="/panel" class="text-dark text-decoration-none">AI Video<br/>Analyser</a></span>
+            <span class="d-block text-center p-3 fs-4 lh-1 fw-bold" style="height: 10vh;"><a href="/panel" class="text-white text-decoration-none">AI VIDEO</a></span>
 
-            <div class="p-3 menu-content">
+            <div class="px-2 menu-content">
 
                 <div class="d-flex flex-column justify-content-between mt-3" style="height: 85vh;">
 
                     <div class="menu">
-                        <span class="text-muted">ADMIN</span>
-                        <ul>
-                            <li><a href="/panel/users"><i class="fa-solid fa-users"></i> Użytkownicy</a></li>
+                        <ul class="{{ request()->is('panel/analyse') ? 'active' : ''}}">
+                            <li><a href="/panel/analyse"><i class="fa-solid fa-users"></i> Analiza</a></li>
                         </ul>
+                        <div class="dropdown {{ request()->is('panel/admin*') ? 'active' : ''}}">
+                            <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fa-solid fa-lock"></i> Administrator</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/panel/admin/users" class="dropdown-item"><i class="fa-solid fa-users"></i> Użytkownicy</a></li>
+                            </ul>
+                        </div>
                     </div>
 
                     <a href="/logout" class="btn btn-danger">Wyloguj</a>
@@ -86,5 +92,8 @@
 
 </main>
 
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+@stack('scripts')
 </body>
 </html>
