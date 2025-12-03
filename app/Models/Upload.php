@@ -3,8 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
-
 class Upload extends Model
 {
     protected $table = 'video_uploads';
@@ -17,7 +15,16 @@ class Upload extends Model
         'status'
     ];
 
+    //Pobranie powiązania użytkownika przez user_id
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function scopeForUser($query, $user_id) {
         return $query->where('user_id', $user_id);
+    }
+
+    public function scopeForAdmin($query, $status) {
+        return $query->where('status', $status);
     }
 }

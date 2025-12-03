@@ -24,7 +24,7 @@
                         <td>{{ $upload->original_name }}</td>
                         <td>{{ $upload->extension }}</td>
                         <td>{{ $upload->size }}</td>
-                        <td>@if($upload->status === 'completed') <span class="badge text-bg-success">Ukończono</span> @elseif($upload->status === 'failed') <span class="badge text-bg-danger">Błąd</span> @endif</td>
+                        <td>@if($upload->status === 'approved') <span class="badge text-bg-success">Zatwierdzono</span> @elseif($upload->status == 'awaiting') <span class="badge text-bg-warning">Oczekuje na zatwierdzenie</span> @elseif($upload->status == 'rejected') <span class="badge text-bg-danger">Odrzucono</span>@elseif($upload->status === 'failed') <span class="badge text-bg-danger">Błąd</span> @endif</td>
                         <td>{{ $upload->updated_at }}</td>
                         <td>
                             <i class="fa-solid fa-video" data-bs-toggle="modal" data-bs-target="#video"></i>

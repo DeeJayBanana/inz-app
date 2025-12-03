@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthControllers\LoginController;
 use App\Http\Controllers\AuthControllers\RegisterController;
 use App\Http\Controllers\AuthControllers\ResendVerificationController;
 use App\Http\Controllers\Panel\UsersController;
+use App\Http\Controllers\Panel\VideoAcceptController;
 use App\Http\Controllers\Panel\VideoController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -47,6 +48,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('panel')->group(function () {
         Route::get('/', function () { return view('panel.dashboard'); });
         Route::get('/analyse', [VideoController::class, 'index']);
+        Route::get('/videos/{uuid}/accept', [VideoAcceptController::class, 'accept'])->name('videos.accept');
+        Route::get('/videos/{uuid}/reject', [VideoAcceptController::class, 'reject'])->name('videos.reject');
+        Route::get('/videos', VideoAcceptController::class);
     });
 
     Route::prefix('panel/admin')->group(function () {

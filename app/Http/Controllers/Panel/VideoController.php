@@ -85,7 +85,7 @@ class VideoController extends Controller
             $sizeGB = round(filesize($finalPath) / (1024 * 1024 * 1024), 2);
             $uploadFile->update([
                 'size' => $sizeGB,
-                'status' => 'completed'
+                'status' => 'awaiting'
             ]);
 
             return response()->json(['success' => 'done']);

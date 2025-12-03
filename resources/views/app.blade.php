@@ -60,6 +60,7 @@
                             <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fa-solid fa-lock"></i> Administrator</a>
                             <ul class="dropdown-menu">
                                 <li><a href="/panel/admin/users" class="dropdown-item"><i class="fa-solid fa-users"></i> Użytkownicy</a></li>
+                                <li><a href="/panel/videos" class="dropdown-item"><i class="fa-solid fa-users"></i> Video</a></li>
                             </ul>
                         </div>
                     </div>
