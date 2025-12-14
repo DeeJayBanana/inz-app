@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules\Password;
 
 class RegisterController extends Controller
@@ -30,7 +31,9 @@ class RegisterController extends Controller
 
             $user = User::create($data);
             $user->assignRole('user');
-            event(new Registered($user));
+            DB::afterCommit(function () use ($user) {
+                event(new Registered($user));
+            });
         } catch (\Exception $e) {
             //dd($e->getMessage());
             return back()->with('error', "Wystąpił nieoczekiwany błąd. Spróbuj ponowanie później bądź skontaktuj się z administratorem.");

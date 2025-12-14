@@ -4,7 +4,7 @@
 
     <section class="container" id="verify_email">
 
-        <div class="col-12 col-md-6 rounded-5 shadow-lg p-5">
+        <div class="col-12 col-md-6 rounded-5 shadow-lg bg-white p-5">
 
             <div class="row row-gap-3 align-items-center">
 

@@ -2,10 +2,12 @@
 
 @section('panel')
 
+    <div class="container-fluid d-flex justify-content-center">
+
         <div id="upload" class="dropzone"></div>
 
-
-        <table class="table table-hover">
+        @if($uploads->isNotEmpty())
+        <table class="table table-hover mt-3">
             <thead>
                 <tr>
                     <th>UUID</th>
@@ -33,6 +35,7 @@
                 @endforeach
             </tbody>
         </table>
+        @endif
 
         <div class="modal fade" id="video" tabindex="-1">
             <div class="modal-dialog modal-xl">
@@ -50,6 +53,7 @@
                 </div>
             </div>
         </div>
+    </div>
 
 
 @endsection
@@ -65,6 +69,7 @@
 
             const dz = new Dropzone('#upload', {
                 autoProcessQueue: false,
+                dictDefaultMessage: 'Upuść plik tutaj, aby załadować',
                 url: "/video/upload",
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
@@ -76,6 +81,7 @@
                 retryChunks: true,
                 retryChunksLimit: 3,
                 maxFilesize: 10000,
+                maxFiles: 5,
             });
 
             dz.on('addedfile', function(file) {

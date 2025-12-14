@@ -24,7 +24,7 @@ Route::view('/login', 'auth.login')
     ->middleware('guest')
     ->name('login');
 
-Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('authenticate');
 
 //Verify Email Form
 Route::view('/verify_email', 'auth.verify_email')

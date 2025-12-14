@@ -4,7 +4,7 @@
 
     <section class="container" id="login">
 
-        <div class="col-12 col-md-6 rounded-5 shadow-lg p-5">
+        <div class="col-12 col-md-6 rounded-5 shadow-lg bg-white p-5">
 
             <div class="row row-gap-3 align-items-center">
 
@@ -15,7 +15,7 @@
                 <div class="col-12 col-md-6">
 
                     <h1 class="fw-bold mb-5 text-center text-md-start">Zaloguj się</h1>
-                    <form action="{{ route('login') }}" method="POST" class="register-form" >
+                    <form action="{{ route('authenticate') }}" method="POST" class="register-form" >
 
                     @csrf
                     <div class="mb-4 @error ('login') danger @enderror">

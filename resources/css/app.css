@@ -11,6 +11,13 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+:root {
+    --background-color: #17151b;
+    --border-color: #312e37;
+    --title-text-color: #c0bcca;
+    --blue-hover: #ACF6FA;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -19,8 +26,43 @@
 
 html, body{
     height: 100%;
+    background-color: #000;
 }
 
+.title {
+    color: var(--title-text-color);
+    padding: 0;
+    font-size: 40px;
+}
+
+.desc {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    color: #7e7a86;
+}
+
+.table {
+    --bs-table-bg: var(--background-color);
+}
+
+.active > i, .active a{
+    color: var(--blue-hover) !important;
+}
+
+nav {
+    background-color: var(--background-color);
+}
+
+nav .nav-link {
+    color: #7e7a86;
+}
+
+nav .nav-link:hover, .nav-link:focus {
+    color: var(--blue-hover);
+}
+
+    /*REGISTER LOGIN FORM*/
 section#register,
 section#login,
 section#verify_email{
@@ -95,54 +137,154 @@ section#verify_email{
     box-shadow: none !important;
 }
 
-/*MENU*/
-.menu {
-    position: relative;
-    z-index: 1;
+/*DASHBOARD*/
+.title-wrapper {
+    margin-bottom: 43px;
 }
 
-ul li {
+.interactive-list li {
+    max-width: 100%;
+}
+
+.interactive-list li:hover {
+    cursor: pointer;
+}
+
+.interactive-list .item:hover {
+    border: 3px solid var(--blue-hover);
+}
+
+.item {
+    background: var(--background-color);
+    border: 2px solid var(--border-color);
+    border-radius: 5px;
+    min-height: 100%;
+    text-align: center;
+    transition: all .2s ease;
+}
+
+/*MENU*/
+.wrapper header a {
+    color: var(--blue-hover);
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 300px;
+    right: 0;
+    height: 100px;
+    background-color: var(--background-color);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 100;
+}
+
+#left-side {
+    width: 300px;
+    z-index: 101;
+    position: fixed;
+    background-color: var(--background-color);
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border-right: 1px solid var(--border-color);
+    flex-direction: column;
+}
+
+.leftpanel-logo {
+    position: relative;
+    min-height: 100px;
+    height: 100px;
+    border-bottom: 1px solid var(--border-color);
+    align-items: center;
+    display: grid;
+    place-items: center;
+}
+
+.leftpanel-content {
+    flex: 1 0 auto;
+    padding: 48px 20px;
+    height: calc(100% - 100px);
+}
+
+.group_title {
+    padding: 0 10px;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: .5px;
+    color: #7e7a86;
+    margin: 0 0 12px;
+}
+
+.item_group {
+    margin-bottom: 38px;
+}
+
+.group_list {
+    margin: 0;
+    padding: 0;
     list-style-type: none;
 }
 
-ul li a {
-    color: #fff;
+.group_list li{
+    display: flex;
+    align-items: center;
+}
+
+.group_list i {
+    color: #c0bcca;
+}
+
+.group_list a {
+    font-weight: 400;
+    border-radius: 5px;
+    color: #c0bcca;
     text-decoration: none;
+    min-height: 36px;
+    padding: 5px 10px 5px 15px;
+    display: flex;
+    align-items: center;
 }
 
-.dropdown, ul {
-    border-radius: 10px;
-    padding: 10px;
-    margin: 0;
-}
-
-.dropdown-toggle {
-    color: #fff;
-    text-decoration: none;
-}
-
-.dropdown-menu {
-    width: 100%;
+#content {
     position: relative;
-    border: 0;
-    transform: translate(0, 34px) !important;
-    background: rgba(103, 118, 255, 0.6);
-    z-index: -1;
+    margin-top: 100px;
+    margin-left: 300px;
+    padding-top: 45px;
+    min-height: calc(100% - 100px);
 }
 
-.dropdown-item {
-    margin-top: 10px;
-    color: rgba(255, 255, 255, 0.4);
+/*PAGE USERS*/
+.btn-custom {
+    color: var(--title-text-color);
+    background-color: var(--background-color);
+    transition: all .3s ease;
 }
 
-.dropdown-item:hover {
-    color: #fff;
-    background: transparent;
+.btn-custom:hover {
+    color: var(--blue-hover);
+    background-color: var(--background-color);
+    border: 2px solid var(--blue-hover);
 }
-
-.dropdown.active, ul.active {
-    background: linear-gradient(90deg,rgba(148, 162, 255, 1) 0%, rgba(103, 118, 255, 1) 100%);
-}
-
 
 /*PAGE ANALYSE*/
+#upload {
+    display: grid;
+    place-items: center;
+    width: 350px;
+    height: 350px;
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    transition: all .3s ease;
+}
+
+#upload:hover {
+    border: 3px solid var(--blue-hover);
+}
+
+#upload .dz-button {
+    font-size: 25px;
+    color: var(--title-text-color);
+}

@@ -4,7 +4,7 @@
 
     <section class="container" id="register">
 
-        <div class="col-12 col-md-8 rounded-5 shadow-lg p-5">
+        <div class="col-12 col-md-8 rounded-5 shadow-lg bg-white  p-5">
 
             <div class="mx-auto">
             </div>
