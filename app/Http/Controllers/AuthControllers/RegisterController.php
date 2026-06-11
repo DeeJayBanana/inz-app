@@ -30,7 +30,7 @@ class RegisterController extends Controller
             $data['must_change_password'] = false;
 
             $user = User::create($data);
-            $user->assignRole('user');
+            $user->assignRole('użytkownik');
             DB::afterCommit(function () use ($user) {
                 event(new Registered($user));
             });

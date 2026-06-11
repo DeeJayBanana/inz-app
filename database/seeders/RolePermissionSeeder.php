@@ -14,12 +14,18 @@ class RolePermissionSeeder extends Seeder
     public function run(): void
     {
         //Roles
-        $user = Role::firstOrCreate(['name' => 'user', 'guard_name' => 'web']);
-        $admin = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
+        Role::firstOrCreate(['name' => 'użytkownik', 'guard_name' => 'web']);
+        Role::firstOrCreate(['name' => 'administrator', 'guard_name' => 'web']);
 
-        $addUsers = Permission::firstOrCreate(['name' => 'add_users']);
-        $editUsers = Permission::firstOrCreate(['name' => 'edit_users']);
+        //Permission Create
+        Permission::firstOrCreate(['name' => 'videos.moderate', 'guard_name' => 'web']);
+        Permission::firstOrCreate(['name' => 'videos.view', 'guard_name' => 'web']);
 
-        $admin->givePermissionTo([$addUsers, $editUsers]);
+        Permission::firstOrCreate(['name' => 'users.view', 'guard_name' => 'web']);
+        Permission::firstOrCreate(['name' => 'users.create', 'guard_name' => 'web']);
+        Permission::firstOrCreate(['name' => 'users.edit', 'guard_name' => 'web']);
+        Permission::firstOrCreate(['name' => 'users.update', 'guard_name' => 'web']);
+        Permission::firstOrCreate(['name' => 'users.delete', 'guard_name' => 'web']);
+
     }
 }

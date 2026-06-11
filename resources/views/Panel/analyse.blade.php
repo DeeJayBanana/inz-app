@@ -2,21 +2,21 @@
 
 @section('panel')
 
-    <div class="container-fluid d-flex justify-content-center">
+    <div class="container-fluid d-flex flex-column justify-content-center align-items-center">
 
         <div id="upload" class="dropzone"></div>
 
         @if($uploads->isNotEmpty())
-        <table class="table table-hover mt-3">
+        <table class="table table-dark table-hover mt-3">
             <thead>
                 <tr>
                     <th>UUID</th>
-                    <th>Name</th>
-                    <th>Extension</th>
-                    <th>Size (GB)</th>
+                    <th>Nazwa</th>
+                    <th>Rozszerzenie</th>
+                    <th>Rozmiar (GB)</th>
                     <th>Status</th>
-                    <th>Updated at</th>
-                    <th>Action</th>
+                    <th>Zaaktualizowany</th>
+                    <th>Akcje</th>
                 </tr>
             </thead>
             <tbody>

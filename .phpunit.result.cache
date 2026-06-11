@@ -1,0 +1,1 @@
+{"version":2,"defects":{"Tests\\Unit\\VideoUploadTest::a_clip_belongs_to_a_video_upload_via_uuid":7},"times":{"Tests\\Unit\\VideoUploadTest::it_can_successfully_change_status_to_processing":0.063,"Tests\\Unit\\VideoUploadTest::a_clip_belongs_to_a_video_upload_via_uuid":0.069}}

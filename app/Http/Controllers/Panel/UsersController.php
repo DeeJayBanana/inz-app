@@ -9,14 +9,25 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
 {
     public function __invoke(Request $request) {
-        $users = User::with('roles')->get()->sortByDesc('created_at');
+        $users = User::with('roles')
+            ->get()
+            ->sortByDesc(function ($user)
+                { return $user->hasRole('administrator'); })
+            ->values();
         $roles = Role::all();
-        return view('panel.users', ['users' => $users, 'roles' => $roles]);
+
+        $permissions = Permission::all();
+        $groupedPermission = $permissions->groupBy(function($permission) {
+           return explode('.', $permission->name)[0];
+        });
+
+        return view('panel.users', ['users' => $users, 'roles' => $roles, 'permissions' => $permissions, 'groupedPermission' => $groupedPermission]);
     }
 
     public function add(Request $request) {
@@ -66,11 +77,11 @@ class UsersController extends Controller
     public function update(Request $request, $id) {
         $user = User::findOrFail($id);
 
-        if($user->getRoleNames()->contains('admin') && auth()->id() !== $user->id) {
+        if($user->getRoleNames()->contains('administrator') && auth()->id() !== $user->id) {
             return redirect()->back()->with('error', 'Nie możesz edytować konta administratora.');
         }
         //Tap - pozwala wywołąć metode na obiekcie po akcji
-        $user->tap()->update([
+        tap($user)->update([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
             'email' => $request->input('email'),

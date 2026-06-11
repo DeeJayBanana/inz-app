@@ -30,7 +30,13 @@
 
         <div class="wrapper">
             <header class="d-flex align-items-center justify-content-end px-3">
-                <a href="/logout" class="fs-1 float-end"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+                <div class="dropdown">
+                    <img src="{{ asset('storage/' . (!empty($user->avatar) ? $user->avatar : 'avatars/avatar-default-icon.png')) }}" width="50px" height="50px" class="btn p-0 dropdown-toggle object-fit-cover rounded-circle" data-bs-toggle="dropdown">
+                    <ul class="dropdown-menu rounded-0">
+                        <li class="{{request()->is('panel/account') ? 'active' : ''}}"><a class="dropdown-item" href="/panel/account"><i class="fa-solid fa-user"></i> Konto</a></li>
+                        <li><a class="dropdown-item" href="/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Wyloguj</a></li>
+                    </ul>
+                </div>
             </header>
             <section id="left-side">
                 <div class="leftpanel-logo">
@@ -47,18 +53,23 @@
                         <h2 class="group_title">Użytkownik</h2>
                         <ul class="group_list">
                             <li class="{{request()->is('panel/analyse') ? 'active' : ''}}"><i class="fa-solid fa-video"></i> <a href="/panel/analyse">Analiza Wideo</a></li>
+                            <li class="{{request()->is('panel/account') ? 'active' : ''}}"><i class="fa-solid fa-user"></i> <a href="/panel/account">Konto</a></li>
                         </ul>
                     </div>
 
-                    @if(auth()->user()->hasRole('admin'))
+                    @can(['users.view', 'videos.view'])
                     <div class="item_group">
                         <h2 class="group_title">Administrator</h2>
                         <ul class="group_list">
+                            @can('users.view')
                             <li class="{{ request()->is('panel/admin/users') ? 'active' : '' }}"><i class="fa-solid fa-users"></i><a href="/panel/admin/users">Użytkownicy</a></li>
+                            @endcan
+                            @can('videos.view')
                             <li class="{{request()->is('panel/videos') ? 'active' : ''}}"><i class="fa-solid fa-video"></i><a href="/panel/videos">Wideo</a></li>
+                            @endcan
                         </ul>
                     </div>
-                    @endif
+                    @endcan
                 </div>
             </section>
             <section id="content">

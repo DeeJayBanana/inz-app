@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthControllers\LoginController;
 use App\Http\Controllers\AuthControllers\RegisterController;
 use App\Http\Controllers\AuthControllers\ResendVerificationController;
+use App\Http\Controllers\Panel\AccountController;
+use App\Http\Controllers\Panel\RoleController;
 use App\Http\Controllers\Panel\UsersController;
 use App\Http\Controllers\Panel\VideoAcceptController;
 use App\Http\Controllers\Panel\VideoController;
@@ -48,22 +50,51 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('panel')->group(function () {
         Route::get('/', function () { return view('panel.dashboard'); });
         Route::get('/analyse', [VideoController::class, 'index']);
-        Route::get('/videos/{uuid}/accept', [VideoAcceptController::class, 'accept'])->name('videos.accept');
-        Route::get('/videos/{uuid}/reject', [VideoAcceptController::class, 'reject'])->name('videos.reject');
-        Route::get('/videos', VideoAcceptController::class);
+
+        Route::get('/videos/{uuid}/accept', [VideoAcceptController::class, 'accept'])
+            ->middleware('permission:video.moderate')
+            ->name('videos.accept');
+
+        Route::get('/videos/{uuid}/reject', [VideoAcceptController::class, 'reject'])
+            ->middleware('permission:videos.moderate')
+            ->name('videos.reject');
+
+        Route::get('/videos', VideoAcceptController::class)
+            ->middleware('permission:videos.view');
+
+        Route::get('/account', [AccountController::class, 'index']);
+        Route::put('/save_account', [AccountController::class, 'update'])->name('account.update');
     });
 
     Route::prefix('panel/admin')->group(function () {
         //Subpage UsersController
-        Route::get('/users', UsersController::class);
+        Route::get('/users', UsersController::class)
+            ->middleware('permission:users.view');
     });
 
     // Edit data user
-    Route::post('/users/add', [UsersController::class, 'add'])->name('users.add');
-    Route::get('/users/{id}/edit', [UsersController::class, 'edit'])->name('users.edit');
-    Route::put('/users/{id}', [UsersController::class, 'update'])->name('users.update');
-    Route::delete('/users/{id}', [UsersController::class, 'delete'])->name('users.delete');
+    Route::post('/users/add', [UsersController::class, 'add'])
+        ->middleware('permission:users.add')
+        ->name('users.add');
+    Route::get('/users/{id}/edit', [UsersController::class, 'edit'])
+        ->middleware('permission:users.edit')
+        ->name('users.edit');
+    Route::put('/users/{id}', [UsersController::class, 'update'])
+        ->middleware('permission:users.update')
+        ->name('users.update');
+    Route::delete('/users/{id}', [UsersController::class, 'delete'])
+        ->middleware('permission:users.delete')
+        ->name('users.delete');
 
+    //Roles
+    Route::post('/roles/store', [RoleController::class, 'store'])
+        ->name('roles.store');
+    Route::get('/roles/{id}/edit', [RoleController::class, 'edit'])
+        ->name('roles.edit');
+    Route::put('/roles/{id}/update', [RoleController::class, 'update'])
+        ->name('roles.update');
+    Route::delete('/roles/{id}', [RoleController::class, 'delete'])
+        ->name('roles.delete');
 
     //Video
     Route::post('/video/store', [VideoController::class, 'store'])->name('video.store');

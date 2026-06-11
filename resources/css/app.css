@@ -62,6 +62,10 @@ nav .nav-link:hover, .nav-link:focus {
     color: var(--blue-hover);
 }
 
+#changeSectionUserPermissions > span {
+    color: var(--title-text-color);
+}
+
     /*REGISTER LOGIN FORM*/
 section#register,
 section#login,
@@ -179,6 +183,23 @@ header {
     z-index: 100;
 }
 
+header .dropdown-menu {
+    background-color: var(--background-color);
+}
+
+header .dropdown-menu li > a:focus,
+header .dropdown-menu li > a:hover{
+    background-color: var(--background-color);
+}
+
+header .dropdown-menu li > a:hover {
+    color: var(--blue-hover);
+}
+
+header .dropdown-menu .dropdown-item {
+    color: var(--title-text-color);
+}
+
 #left-side {
     width: 300px;
     z-index: 101;
@@ -266,6 +287,21 @@ header {
     color: var(--blue-hover);
     background-color: var(--background-color);
     border: 2px solid var(--blue-hover);
+}
+
+/*PAGE ACCOUNT*/
+#account label {
+    color: var(--title-text-color);
+}
+#account input, #account input::placeholder {
+    color: var(--title-text-color);
+    background-color: var(--background-color);
+}
+
+#account input:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: var(--blue-hover);
 }
 
 /*PAGE ANALYSE*/

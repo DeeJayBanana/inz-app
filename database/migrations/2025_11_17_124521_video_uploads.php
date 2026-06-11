@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('original_name');
             $table->string('extension');
             $table->decimal('size', 8, 2)->nullable();
-            $table->enum('status', ['uploading', 'completed'])->default('uploading');
+            $table->enum('status', ['uploading','awaiting','approved','rejected','failed'])->default('uploading');
             $table->timestamps();
         });
     }

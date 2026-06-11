@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  laravel:
+    build: .
+    container_name: laravel_app
+    volumes:
+      - .:/var/www
+      - ./storage:/var/www/storage
+      - vendor_data:/var/www/vendor
+    ports:
+      - "8000:8000"
+      - "5173:5173"
+    depends_on:
+      - db
+
+  python_ai:
+    build: ./ai_python
+    container_name: python_engine
+    volumes:
+      - ./ai_python:/app
+      - ./storage:/var/www/storage
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: inz_database
+      MYSQL_ROOT_PASSWORD: secret
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
+  vendor_data:
