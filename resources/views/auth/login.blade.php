@@ -14,7 +14,7 @@
 
                 <div class="col-12 col-md-6">
 
-                    <h1 class="fw-bold mb-5 text-center text-md-start">Zaloguj się</h1>
+                    <h1 class="fw-bold mb-5 text-center text-md-start">Zaloguj się - 2026</h1>
                     <form action="{{ route('authenticate') }}" method="POST" class="register-form" >
 
                     @csrf
